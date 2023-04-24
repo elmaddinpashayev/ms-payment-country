@@ -1,0 +1,18 @@
+server:
+  port: 8085
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: none
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: 12345
+    driverClassName: org.postgresql.Driver
+  liquibase:
+    changeLog: classpath:liquibase/changelog-master.yml
+
+client:
+  ms-country:
+    endpoint: http://localhost:8081
