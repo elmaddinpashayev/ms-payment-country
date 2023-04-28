@@ -15,14 +15,14 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.persistence.EntityNotFoundException;
+import java.lang.reflect.UndeclaredThrowableException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import static az.company.mspayment.model.constant.ExceptionConstant.*;
-import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.*;
 
 @Slf4j
 @RestControllerAdvice
@@ -67,6 +67,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         ErrorModel error = new ErrorModel(HttpStatus.NOT_FOUND, "Entity not found", ex.getMessage());
 
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(UndeclaredThrowableException.class) //InvocationTargetException
+    private ResponseEntity<ErrorModel> handleServiceUnavailable(UndeclaredThrowableException exception){
+        ErrorModel error = new ErrorModel(HttpStatus.SERVICE_UNAVAILABLE,"Service Unvailable",exception.getCause().getCause().getMessage());
+
+        return new ResponseEntity<>(error,SERVICE_UNAVAILABLE);
     }
 
 
