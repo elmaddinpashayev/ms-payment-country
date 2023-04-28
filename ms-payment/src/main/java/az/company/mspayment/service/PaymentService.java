@@ -6,10 +6,17 @@ import az.company.mspayment.mapper.PaymentMapper;
 import az.company.mspayment.model.constant.ExceptionConstant;
 import az.company.mspayment.model.entity.Payment;
 import az.company.mspayment.model.request.PaymentRequest;
+import az.company.mspayment.model.response.PageablePaymentResponse;
 import az.company.mspayment.model.response.PaymentResponse;
 import az.company.mspayment.repository.PaymentRepo;
+import az.company.mspayment.service.specificarion.PaymentSpecification;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import az.company.mspayment.model.request.PaymentCriteria;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +26,7 @@ import static az.company.mspayment.mapper.PaymentMapper.mapEntityToResponse;
 import static az.company.mspayment.mapper.PaymentMapper.mapRequestToEntity;
 import static az.company.mspayment.model.constant.ExceptionConstant.COUNTRY_NOT_FOUNT_MESSAGE;
 import static java.lang.String.format;
+import static org.springframework.data.domain.Sort.Direction.DESC;
 
 @Service
 @RequiredArgsConstructor
@@ -48,10 +56,26 @@ public class PaymentService {
         return mapEntityToResponse(payment);
     }
 
-    public List<PaymentResponse> getAllPayment() {
-        return paymentRepo.findAll()
+    public PageablePaymentResponse getAllPayment(int page, int count, PaymentCriteria criteria) {
+        log.info("getAllPayment.started");
+
+        Pageable pageable = PageRequest.of(page, count, Sort.by(DESC, "id"));
+
+        Page<Payment> pageablePayments = paymentRepo.findAll(new PaymentSpecification(criteria), pageable);
+
+        List<PaymentResponse> payments = pageablePayments.getContent()
                 .stream()
                 .map(PaymentMapper::mapEntityToResponse).collect(Collectors.toList());
+
+        log.info("getAllPayment.success");
+
+        return  PageablePaymentResponse.builder()
+                .payments(payments)
+                .hasNext(pageablePayments.hasNext())
+                .totalElements(pageablePayments.getTotalElements())
+                .totalPages(pageablePayments.getTotalPages())
+                .build();
+
     }
 
     public void deletePaymentById(Long id) {

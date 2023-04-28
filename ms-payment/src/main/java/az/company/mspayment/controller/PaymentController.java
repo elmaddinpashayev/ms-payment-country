@@ -1,12 +1,13 @@
 package az.company.mspayment.controller;
 
 import az.company.mspayment.model.request.PaymentRequest;
+import az.company.mspayment.model.response.PageablePaymentResponse;
 import az.company.mspayment.model.response.PaymentResponse;
 import az.company.mspayment.service.PaymentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import az.company.mspayment.model.request.PaymentCriteria;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -24,8 +25,10 @@ public class PaymentController {
 
 
     @GetMapping
-    public ResponseEntity<List<PaymentResponse>> getAllPayment() {
-        return ResponseEntity.ok(paymentService.getAllPayment());
+    public ResponseEntity<PageablePaymentResponse> getAllPayment(@RequestParam int page,
+                                                                 @RequestParam int count,
+                                                                 PaymentCriteria criteria) {
+        return ResponseEntity.ok(paymentService.getAllPayment(page,count,criteria));
     }
 
     @GetMapping("/{id}")
