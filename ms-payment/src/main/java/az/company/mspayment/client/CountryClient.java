@@ -32,7 +32,7 @@ import java.util.concurrent.TimeoutException;
 @FeignClient(name = "ms-country", url = "${client.ms-country.endpoint}")
 public interface CountryClient {
     @GetMapping("/api/countries")
-    @CircuitBreaker(name = "getAllAvailableCountries",fallbackMethod = "getAllAvailableCountriesFallback")
+    @CircuitBreaker(name = "getAllAvailableCountries",fallbackMethod = "getAvailablityBreaker")
     public List<CountryDto> getAllAvailableCountries(@RequestParam String currency);
 
     default void getAllAvailableCountriesFallback(@RequestParam String currency){

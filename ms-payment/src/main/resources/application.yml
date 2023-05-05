@@ -48,5 +48,5 @@ resilience4j:
     instances:
       myCircuitBreaker:
         baseConfig: default
-      myCustomCircuitBreaker:
+      getAvailablityBreaker:
         baseConfig: getAllAvailableCountriesConfig
