@@ -1,5 +1,6 @@
 package az.company.mspayment.model.entity;
 
+
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;

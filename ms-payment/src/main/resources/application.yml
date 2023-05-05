@@ -30,7 +30,7 @@ resilience4j:
   circuitbreaker:
     configs:
       default:
-        sliding-window-type:
+        sliding-window-type: count_based
         slidingWindowSize: 50
         permittedNumberOfCallsInHalfOpenState: 5
         automaticTransitionFromOpenToHalfOpenEnabled: true
