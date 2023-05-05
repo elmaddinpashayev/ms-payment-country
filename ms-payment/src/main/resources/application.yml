@@ -17,17 +17,36 @@ client:
   ms-country:
     endpoint: http://localhost:8081
 
+management:
+  health:
+    circuit-breakers:
+      enabled: true
+  endpoint:
+    health:
+      show-details: always
+
+
 resilience4j:
   circuitbreaker:
     configs:
       default:
-        registerHealthIndicator: true
-        slidingWindowSize: 100
-        minimumNumberOfCalls: 100
-        permittedNumberOfCallsInHalfOpenState: 10
+        sliding-window-type:
+        slidingWindowSize: 50
+        permittedNumberOfCallsInHalfOpenState: 5
         automaticTransitionFromOpenToHalfOpenEnabled: true
-        waitDurationInOpenState: 60s
-        failureRateThreshold: 50
-        eventConsumerBufferSize: 10
-        recordExceptions:
-          - java.io.IOException
+        waitDurationInOpenState: 30s
+        failureRateThreshold: 60
+        eventConsumerBufferSize: 20
+      customConfig:
+        sliding-window-type:
+        slidingWindowSize: 50
+        permittedNumberOfCallsInHalfOpenState: 5
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        waitDurationInOpenState: 30s
+        failureRateThreshold: 60
+        eventConsumerBufferSize: 20
+    instances:
+      myCircuitBreaker:
+        baseConfig: default
+      myCustomCircuitBreaker:
+        baseConfig: customConfig

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/api-gateway/api-gateway.iml" filepath="$PROJECT_DIR$/api-gateway/api-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eureka-server/eureka-server.iml" filepath="$PROJECT_DIR$/eureka-server/eureka-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ms-country/ms-country.iml" filepath="$PROJECT_DIR$/ms-country/ms-country.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ms-payment/ms-payment.iml" filepath="$PROJECT_DIR$/ms-payment/ms-payment.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/ms-payment-country.iml" filepath="$PROJECT_DIR$/.idea/ms-payment-country.iml" />
+    </modules>
+  </component>
+</project>
