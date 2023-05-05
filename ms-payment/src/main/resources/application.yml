@@ -37,7 +37,7 @@ resilience4j:
         waitDurationInOpenState: 30s
         failureRateThreshold: 60
         eventConsumerBufferSize: 20
-      customConfig:
+      getAllAvailableCountriesConfig:
         sliding-window-type:
         slidingWindowSize: 50
         permittedNumberOfCallsInHalfOpenState: 5
@@ -49,4 +49,4 @@ resilience4j:
       myCircuitBreaker:
         baseConfig: default
       myCustomCircuitBreaker:
-        baseConfig: customConfig
+        baseConfig: getAllAvailableCountriesConfig
