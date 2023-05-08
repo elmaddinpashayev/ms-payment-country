@@ -1,5 +1,6 @@
 server:
-  port: 8085
+  port: 0
+
 
 spring:
   jpa:
@@ -12,10 +13,21 @@ spring:
     driverClassName: org.postgresql.Driver
   liquibase:
     changeLog: classpath:liquibase/changelog-master.yml
+  application:
+    name: ms-payment
 
-client:
-  ms-country:
-    endpoint: http://localhost:8081
+#client:
+#  ms-country:
+#    endpoint: http://localhost:8761
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+    register-with-eureka: true
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${random.value}
 
 management:
   health:

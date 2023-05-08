@@ -38,12 +38,12 @@ public class PaymentService {
 
     public void savePayment(PaymentRequest request) {
         log.info("savePayment.started");
-        countryClient.getAllAvailableCountries(request.getCurrency())
-                .stream()
-                .filter(country -> country.getRemaningLimit().compareTo(request.getAmount()) > 0)
-                .findFirst()
-                .orElseThrow(() -> new NotFoundException(format(ExceptionConstant.COUNTRY_NOT_FOUND_CODE, request.getAmount(),
-                        request.getCurrency()), COUNTRY_NOT_FOUNT_MESSAGE));
+//        countryClient.getAllAvailableCountries(request.getCurrency())
+//                .stream()
+//                .filter(country -> country.getRemaningLimit().compareTo(request.getAmount()) > 0)
+//                .findFirst()
+//                .orElseThrow(() -> new NotFoundException(format(ExceptionConstant.COUNTRY_NOT_FOUND_CODE, request.getAmount(),
+//                        request.getCurrency()), COUNTRY_NOT_FOUNT_MESSAGE));
         paymentRepo.save(mapRequestToEntity(request));
         log.info("savePayment.success");
     }

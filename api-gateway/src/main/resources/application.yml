@@ -1,14 +1,42 @@
-
 server:
-  port: 8020
+  port: 8888
 
 spring:
   application:
     name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: ms-payment
+          uri: lb://ms-payment
+          predicates:
+            - Path=/api/payment/**
+        - id: ms-country
+          uri: lb://ms-country
+          predicates:
+            - Path=/api/**
+      discovery:
+        locator:
+          enabled: true
+
 
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+    register-with-eureka: true
+  instance:
+    prefer-ip-address: true
+
+
+ #butun actuator linklerini elave et
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+
+
 
 

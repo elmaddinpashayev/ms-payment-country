@@ -16,6 +16,7 @@
     <properties>
         <java.version>11</java.version>
         <spring-cloud.version>2020.0.3</spring-cloud.version>
+        <kotlin.version>1.5.0-M2</kotlin.version>
     </properties>
     <dependencies>
 
@@ -42,6 +43,7 @@
             <version>42.2.27</version>
             <scope>runtime</scope>
         </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
