@@ -9,12 +9,14 @@
         <outputRelativeToContentRoot value="true" />
         <module name="ms-country" />
         <module name="api-gateway" />
+        <module name="config-server" />
         <module name="ms-payment" />
         <module name="eureka-server" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="api-gateway" target="11" />
+      <module name="config-server" target="11" />
       <module name="eureka-server" target="11" />
       <module name="ms-country" target="11" />
       <module name="ms-payment" target="11" />
@@ -23,6 +25,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="api-gateway" options="-parameters" />
+      <module name="config-server" options="-parameters" />
       <module name="eureka-server" options="-parameters" />
       <module name="ms-country" options="-parameters" />
       <module name="ms-payment" options="-parameters" />
